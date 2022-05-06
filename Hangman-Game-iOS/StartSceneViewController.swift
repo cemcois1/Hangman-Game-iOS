@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  Hangman-Game-iOS
-//
-//  Created by lab3 on 6.05.2022.
-//
-
 import UIKit
 
 class StartSceneViewController: UIViewController {
@@ -33,12 +26,11 @@ class StartSceneViewController: UIViewController {
     }
 
     @IBAction func test() {
-        print(languageTitle)
-        if languageTitle=="TR" {
-            <#statements#>
-        } else {
-            <#statements#>
-        }
+        ChangeDataSet(languageTitle)
+        
+    }
+    func ChangeDataSet(_ language:String){
+        print(language)
     }
  
     
