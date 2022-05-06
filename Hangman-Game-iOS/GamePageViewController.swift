@@ -1,6 +1,6 @@
 import UIKit
 
-class GamePageViewController: UIViewController {
+class GamePageViewController: UIViewController ,XMLParserDelegate  {
 
     @IBOutlet weak var guessTextField: UITextField!
     @IBOutlet weak var wrongLetters: UILabel!
@@ -10,6 +10,7 @@ class GamePageViewController: UIViewController {
     
 
     //data sonra kelimeleri xml dosyasından çekeceğim
+    var language :String = ""
     var wordArray = ["DENEMEK","HAVUZ","TESTERE"]
     
     var word:String = ""
@@ -23,20 +24,42 @@ class GamePageViewController: UIViewController {
     var displayWordArray = [Character]()
     
     var guess:Character!
+    var words = [String] ()
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        word=wordArray.randomElement()!
+        dump(language + "is Language ")
+        word = GetWordFromXML( language)
         
         usedLetters = Array(word)
         
-        print(word)
+        print(word + " is Word")
         for _ in 1...word.count {
             displayWord+="?"
             
             displayWorldLabel.text = displayWord
             displayWordArray=Array(displayWord)
         }
+    }
+    func GetWordFromXML(_ lang:String) -> String {
+        var word : String = " "
+        
+        if language == "TR" {
+            word = wordArray.randomElement()!
+        } else {
+            if let path = Bundle.main.url(forResource: "words", withExtension: "xml") {
+                if let parser = XMLParser(contentsOf: path) {
+                    parser.delegate = self
+                    parser.parse()
+                    //word = words.randomElement()!.capitalized
+                } else {
+                    print("Failed")
+                }
+            }
+        }
+        return word
     }
     
     @IBAction func guessButton(_ sender: UIButton) {
@@ -100,7 +123,7 @@ class GamePageViewController: UIViewController {
         displayWord = ""
         displayWordArray = []
         
-        word = wordArray.randomElement()!
+        word = GetWordFromXML(language)
         usedLetters = Array(word)
         
         for _ in 1...word.count {

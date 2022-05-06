@@ -13,26 +13,32 @@ class StartSceneViewController: UIViewController {
     @IBAction func CreatePopupMenu(){
         let optionClosure = {(action : UIAction) in
             self.languageTitle = action.title
-            }
+        }
         
         monPopupButton.menu = UIMenu (children : [
             UIAction(title: "TR", state: .on ,handler: optionClosure),
             UIAction(title: "EN", handler: optionClosure),
             
         ])
+      
        
         
         
     }
 
-    @IBAction func test() {
+    @IBAction func Play() {
         ChangeDataSet(languageTitle)
         
     }
-    func ChangeDataSet(_ language:String){
+     func ChangeDataSet(_ language:String){
+        let controller = storyboard?.instantiateViewController(withIdentifier: "GamePage")
+         as! GamePageViewController
+        
+        controller.language = language
         print(language)
     }
  
     
+
 }
 
