@@ -53,6 +53,7 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
                 if let parser = XMLParser(contentsOf: path) {
                     parser.delegate = self
                     parser.parse()
+                    
                     //word = words.randomElement()!.capitalized
                 } else {
                     print("Failed")
@@ -61,7 +62,12 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
         }
         return word
     }
+
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+        print( attributeDict)
+    }
     
+
     @IBAction func guessButton(_ sender: UIButton) {
         let valueChanged = guessTextField.resignFirstResponder()
         
@@ -123,7 +129,7 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
         displayWord = ""
         displayWordArray = []
         
-        word = GetWordFromXML(language)
+        word = wordArray[0]
         usedLetters = Array(word)
         
         for _ in 1...word.count {
