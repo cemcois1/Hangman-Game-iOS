@@ -48,13 +48,15 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
         
         if language == "TR" {
             word = wordArray.randomElement()!
+            print("TR word is "+word)
         } else {
             if let path = Bundle.main.url(forResource: "words", withExtension: "xml") {
                 if let parser = XMLParser(contentsOf: path) {
                     parser.delegate = self
                     parser.parse()
                     
-                    word = words.randomElement()!.capitalized
+                    word = words.randomElement()!.uppercased()
+                    
                 } else {
                     print("Failed")
                 }
@@ -72,7 +74,7 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
             randomWord = ""
         }
         
-        var myword = (randomWord)!
+        let myword = (randomWord)!.uppercased()
         words.append(myword)
         
     }
