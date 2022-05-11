@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		814A7D85282528D8001051A5 /* GamePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A7D84282528D8001051A5 /* GamePageViewController.swift */; };
-		814A7D89282540C5001051A5 /* words.xml in Resources */ = {isa = PBXBuildFile; fileRef = 814A7D88282540C5001051A5 /* words.xml */; };
+		81643AE5282BBBF300057722 /* words.xml in Resources */ = {isa = PBXBuildFile; fileRef = 81643AE4282BBBF300057722 /* words.xml */; };
 		817D7F902825076500D02068 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D7F8F2825076500D02068 /* AppDelegate.swift */; };
 		817D7F922825076500D02068 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D7F912825076500D02068 /* SceneDelegate.swift */; };
 		817D7F942825076500D02068 /* StartSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D7F932825076500D02068 /* StartSceneViewController.swift */; };
@@ -19,7 +19,7 @@
 
 /* Begin PBXFileReference section */
 		814A7D84282528D8001051A5 /* GamePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePageViewController.swift; sourceTree = "<group>"; };
-		814A7D88282540C5001051A5 /* words.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = words.xml; path = "../../../../Downloads/Hangman-master/words.xml"; sourceTree = "<group>"; };
+		81643AE4282BBBF300057722 /* words.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = words.xml; path = ../../../../Downloads/words.xml; sourceTree = "<group>"; };
 		817D7F8C2825076500D02068 /* Hangman-Game-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hangman-Game-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		817D7F8F2825076500D02068 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		817D7F912825076500D02068 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,8 +66,8 @@
 				814A7D84282528D8001051A5 /* GamePageViewController.swift */,
 				817D7F952825076500D02068 /* Main.storyboard */,
 				817D7F982825076700D02068 /* Assets.xcassets */,
+				81643AE4282BBBF300057722 /* words.xml */,
 				817D7F9A2825076700D02068 /* LaunchScreen.storyboard */,
-				814A7D88282540C5001051A5 /* words.xml */,
 				817D7F9D2825076700D02068 /* Info.plist */,
 			);
 			path = "Hangman-Game-iOS";
@@ -133,8 +133,8 @@
 			files = (
 				817D7F9C2825076700D02068 /* LaunchScreen.storyboard in Resources */,
 				817D7F992825076700D02068 /* Assets.xcassets in Resources */,
+				81643AE5282BBBF300057722 /* words.xml in Resources */,
 				817D7F972825076500D02068 /* Main.storyboard in Resources */,
-				814A7D89282540C5001051A5 /* words.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

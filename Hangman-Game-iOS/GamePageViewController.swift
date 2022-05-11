@@ -54,7 +54,7 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
                     parser.delegate = self
                     parser.parse()
                     
-                    //word = words.randomElement()!.capitalized
+                    word = words.randomElement()!.capitalized
                 } else {
                     print("Failed")
                 }
@@ -64,7 +64,17 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
     }
 
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-        print( attributeDict)
+        var randomWord = ( attributeDict.randomElement()?.value)
+        randomWord = ( attributeDict.randomElement()?.value)
+        
+        
+        if (randomWord == nil ){
+            randomWord = ""
+        }
+        
+        var myword = (randomWord)!
+        words.append(myword)
+        
     }
     
 
