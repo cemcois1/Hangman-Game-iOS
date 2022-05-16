@@ -1,20 +1,20 @@
 import UIKit
 
 class GamePageViewController: UIViewController ,XMLParserDelegate  {
-
+    
     @IBOutlet weak var guessTextField: UITextField!
-    @IBOutlet weak var wrongLetters: UILabel!
     @IBOutlet weak var displayWorldLabel: UILabel!
     @IBOutlet weak var gameEndImage: UIImageView!
     @IBOutlet weak var hangmanImage: UIImageView!
     
-
+    
     //data sonra kelimeleri xml dosyasından çekeceğim
     var language :String = ""
     var wordArray = ["DENEMEK","HAVUZ","TESTERE"]
     
     var word:String = ""
     
+    @IBOutlet weak var LanguageText: UILabel!
     var wrongLettersArray = [Character]()
     
     var usedLetters = [Character]()
@@ -25,12 +25,13 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
     
     var guess:Character!
     var words = [String] ()
-
-
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dump(language + "is Language ")
+        LanguageText.text = "Language :" + AppDelegate.lang
+        dump(AppDelegate.lang + " is Language ")
         word = GetWordFromXML( language)
         
         usedLetters = Array(word)
@@ -46,11 +47,9 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
     func GetWordFromXML(_ lang:String) -> String {
         var word : String = " "
         
-        if language == "TR" {
+        if AppDelegate.lang == "TR" {
             word = wordArray.randomElement()!
-            print("TR word is "+word)
-        } else {
-            if let path = Bundle.main.url(forResource: "words", withExtension: "xml") {
+            if let path = Bundle.main.url(forResource: "trwords", withExtension: "xml") {
                 if let parser = XMLParser(contentsOf: path) {
                     parser.delegate = self
                     parser.parse()
@@ -60,11 +59,22 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
                 } else {
                     print("Failed")
                 }
+            }        } else {
+                if let path = Bundle.main.url(forResource: "words", withExtension: "xml") {
+                    if let parser = XMLParser(contentsOf: path) {
+                        parser.delegate = self
+                        parser.parse()
+                        
+                        word = words.randomElement()!.uppercased()
+                        
+                    } else {
+                        print("Failed")
+                    }
+                }
             }
-        }
         return word
     }
-
+    
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         var randomWord = ( attributeDict.randomElement()?.value)
         randomWord = ( attributeDict.randomElement()?.value)
@@ -79,11 +89,18 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
         
     }
     
-
+    
     @IBAction func guessButton(_ sender: UIButton) {
-        let valueChanged = guessTextField.resignFirstResponder()
         
-        let guess1 = guessTextField.text
+        if let buttonguess = sender.titleLabel?.text{
+            guess = Character(buttonguess.capitalized)
+            checkForLetter()
+            displayWord = String(displayWordArray)
+            displayWorldLabel.text = displayWord
+            sender.isEnabled = false
+            checkForWin()
+        }
+        /* let guess1 = guessTextField.text
         if guess1 == "" {
             guessTextField.placeholder="Enter a letter"
         } else if guess1!.count > 1 {
@@ -97,7 +114,9 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
             guessTextField.text=""
             checkForWin()
         }
-
+         */
+        
+        
     }
     func checkForLetter(){
         if usedLetters.contains(guess){
@@ -110,7 +129,7 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
             
         } else{
             wrongLettersArray.append(guess)
-            wrongLetters.text = String(wrongLettersArray)
+          
             placeImage()
         }
         
@@ -137,7 +156,6 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
         hangmanImage.image = UIImage(contentsOfFile: "")
         gameEndImage.image = UIImage(contentsOfFile: "")
         wrongLettersArray = []
-        wrongLetters.text = ""
         displayWord = ""
         displayWordArray = []
         

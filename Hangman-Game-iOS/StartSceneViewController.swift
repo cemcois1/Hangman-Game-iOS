@@ -31,11 +31,9 @@ class StartSceneViewController: UIViewController {
         
     }
      func ChangeDataSet(_ language:String){
-        let controller = storyboard?.instantiateViewController(withIdentifier: "GamePage")
-         as! GamePageViewController
-        
-        controller.language = language
-        print(language)
+         AppDelegate.lang=language
+         
+        print(AppDelegate.lang)
     }
  
     
