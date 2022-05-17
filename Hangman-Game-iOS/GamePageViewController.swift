@@ -2,16 +2,12 @@ import UIKit
 
 class GamePageViewController: UIViewController ,XMLParserDelegate  {
     
-    @IBOutlet weak var guessTextField: UITextField!
     @IBOutlet weak var displayWorldLabel: UILabel!
     @IBOutlet weak var gameEndImage: UIImageView!
     @IBOutlet weak var hangmanImage: UIImageView!
     
-    
-    //data sonra kelimeleri xml dosyasından çekeceğim
-    var language :String = ""
-    var wordArray = ["DENEMEK","HAVUZ","TESTERE"]
-    
+    var UsedButtons = [UIButton]()
+
     var word:String = ""
     
     @IBOutlet weak var LanguageText: UILabel!
@@ -32,7 +28,7 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
         super.viewDidLoad()
         LanguageText.text = "Language :" + AppDelegate.lang
         dump(AppDelegate.lang + " is Language ")
-        word = GetWordFromXML( language)
+        word = GetWordFromXML( AppDelegate.lang)
         
         usedLetters = Array(word)
         
@@ -48,7 +44,7 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
         var word : String = " "
         
         if AppDelegate.lang == "TR" {
-            word = wordArray.randomElement()!
+            
             if let path = Bundle.main.url(forResource: "trwords", withExtension: "xml") {
                 if let parser = XMLParser(contentsOf: path) {
                     parser.delegate = self
@@ -72,6 +68,7 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
                     }
                 }
             }
+        print(word)
         return word
     }
     
@@ -91,14 +88,26 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
     
     
     @IBAction func guessButton(_ sender: UIButton) {
-        
+        if AppDelegate.isGameFinished {
+            
+        }
+        else{
+            UsedButtons.append(sender)
+            
+      
         if let buttonguess = sender.titleLabel?.text{
             guess = Character(buttonguess.capitalized)
             checkForLetter()
             displayWord = String(displayWordArray)
             displayWorldLabel.text = displayWord
             sender.isEnabled = false
-            checkForWin()
+            if !AppDelegate.isGameFinished {
+                checkForWin()
+            }
+            else{
+                print("Game over ")
+            }
+        }
         }
         /* let guess1 = guessTextField.text
         if guess1 == "" {
@@ -128,15 +137,21 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
             }
             
         } else{
-            wrongLettersArray.append(guess)
-          
-            placeImage()
+            if AppDelegate.isGameFinished {
+                print(" Game over ")
+            }
+            else{
+                wrongLettersArray.append(guess)
+              
+                placeImage()
+            }
+
         }
         
         
     }
     func placeImage(){
-        print( "Çopadam  asılıyor")
+        
         let p1 = UIImage(named: "pic1")
         let p2 = UIImage(named: "pic2")
         let p3 = UIImage(named: "pic3")
@@ -152,14 +167,17 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
         
     }
     @IBAction func resetButton(_ sender: UIButton) {
-        guessTextField.text = ""
         hangmanImage.image = UIImage(contentsOfFile: "")
         gameEndImage.image = UIImage(contentsOfFile: "")
         wrongLettersArray = []
         displayWord = ""
         displayWordArray = []
+        for button in UsedButtons {
+            button.isEnabled=true
+        }
+        AppDelegate.isGameFinished=false
         
-        word = wordArray[0]
+        word = GetWordFromXML(AppDelegate.lang)
         usedLetters = Array(word)
         
         for _ in 1...word.count {
@@ -172,10 +190,12 @@ class GamePageViewController: UIViewController ,XMLParserDelegate  {
     func checkForWin(){
         if wrongLettersArray.count==8 {
             gameEndImage.image = UIImage(named: "gameOver")
+            AppDelegate.isGameFinished = true
         } else if displayWord.contains("?"){
             
         } else {
             gameEndImage.image = UIImage(named: "youWin")
+            AppDelegate.isGameFinished = true
         }
         
     }

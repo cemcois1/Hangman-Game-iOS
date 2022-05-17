@@ -320,15 +320,24 @@
                                 <rect key="frame" x="95" y="772" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Z"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Y"/>
                                 <connections>
-                                    <action selector="guessButton:" destination="m00-ee-n7S" eventType="touchUpInside" id="kRh-tL-gfu"/>
+                                    <action selector="guessButton:" destination="m00-ee-n7S" eventType="touchUpInside" id="AbW-y3-TXw"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nAV-8X-9fH">
                                 <rect key="frame" x="20" y="113" width="374" height="354"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQ5-fu-376">
+                                <rect key="frame" x="153" y="772" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Z"/>
+                                <connections>
+                                    <action selector="guessButton:" destination="m00-ee-n7S" eventType="touchUpInside" id="hLi-a8-sR2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wBQ-Vn-NQn"/>
                         <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
